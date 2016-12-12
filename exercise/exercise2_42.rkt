@@ -194,17 +194,27 @@
 	(queen-cols board-size))
 
 (define (adjoin-position new-row k rest-of-queens)
-	(map
-		proc
-		new-row))
+	(cons (list k new-row) rest-of-queens))
 
-(define (safe? k positions))
+(define (safe? k positions)
+	(define (x pos) (car pos))
+	(define (y pos) (cadr pos))
+	(let ((pos (car positions))
+				(rest (cdr positions)))
+		(cond ((null? rest) (= 0 0))
+					((= k 0) (= 0 0))
+					((and (not (= (x pos) (x (car rest))))
+								(not (= (y pos) (y (car rest))))
+								(not (= (+ (x pos) (y pos)) (+ (x (car rest)) (y (car rest)))))
+								(not (= (- (x pos) (y pos)) (- (x (car rest)) (y (car rest))))))
+					 (safe? (- k 1) (cons pos (cdr rest))))
+					(else (= 0 1)))))
 
 (define empty-board null)
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(queens 5)
 
 
 

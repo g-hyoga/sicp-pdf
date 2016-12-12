@@ -85,16 +85,22 @@
 
 (define (transpose mat)
 	(accumulate-n cons null mat))
+
+(define (matrix-*-matrix m n)
+	(let ((cols (transpose n)))
+		(map (lambda (row) (matrix-*-vector cols row)) m)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define vector1 (list 1 2))
 (define vector2 (list 3 4))
 (define vector3 (list 5 6))
 (define matrix1 (list vector1 vector2))
+(define matrix2 (list vector2 vector3))
 
 (dot-product vector1 vector2)
 (matrix-*-vector matrix1 vector3)
 (transpose matrix1)
+(matrix-*-matrix matrix1 matrix2)
 
 
 
