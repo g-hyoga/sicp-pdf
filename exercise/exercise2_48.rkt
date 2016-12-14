@@ -84,11 +84,11 @@
 (define (make-frame2 origin edge1 edge2)
   (cons origin (cons edge1 edge2)))
 
-(define (origin1 frame)
+(define (origin-frame frame)
   (car frame))
-(define (edge1-1 frame)
+(define (edge1-frame frame)
   (cadr frame))
-(define (edge1-2 frame)
+(define (edge2-frame frame)
   (caddr frame))
 
 (define (origin2 frame)
@@ -97,6 +97,17 @@
   (car (cdr frame)))
 (define (edge2-2 frame)
   (cdr (cdr frame)))
+
+#;(define (seqment->painter segment-list)
+  (lambda (frame)
+    (for-each
+     (lambda (segment)
+       (draw-line
+        ((frame-coord-map frame)
+         (start-segment segment))
+        ((frame-segment-coord-map frame)
+         (end-segment segment))))
+     segment-list)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 (define (make-segment v1 v2) (cons v1 v2))

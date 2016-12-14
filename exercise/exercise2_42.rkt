@@ -201,20 +201,18 @@
 	(define (y pos) (cadr pos))
 	(let ((pos (car positions))
 				(rest (cdr positions)))
-		(cond ((null? rest) (= 0 0))
-					((= k 0) (= 0 0))
-					((and (not (= (x pos) (x (car rest))))
-								(not (= (y pos) (y (car rest))))
-								(not (= (+ (x pos) (y pos)) (+ (x (car rest)) (y (car rest)))))
-								(not (= (- (x pos) (y pos)) (- (x (car rest)) (y (car rest))))))
-					 (safe? (- k 1) (cons pos (cdr rest))))
-					(else (= 0 1)))))
+		(or (null? rest) 
+				(and (not (= (x pos) (x (car rest))))
+						 (not (= (y pos) (y (car rest))))
+						 (not (= (+ (x pos) (y pos)) (+ (x (car rest)) (y (car rest)))))
+						 (not (= (- (x pos) (y pos)) (- (x (car rest)) (y (car rest)))))
+						 (safe? k (cons pos (cdr rest)))))))
 
 (define empty-board null)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(queens 5)
+(queens 8)
 
 
 

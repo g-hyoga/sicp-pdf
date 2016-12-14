@@ -34,7 +34,7 @@
     (let ((half (beside (flip-horiz quarter) quarter)))
       (below (flip-vert half) half))))
 
-;?????
+;
 (define (square-of-four tl tr bl br)
   (lambda (painter)
     (let ((top (beside (tl painter) (tr painter)))

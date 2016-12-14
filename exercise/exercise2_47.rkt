@@ -63,12 +63,12 @@
 (define right-split2 (split beside below))
 (define up-split2 (split below beside))
 
-#;(define (frame-coord-map frame)
+(define (frame-coord-map frame)
   (lambda (v)
     (add-vect
-     (original-frame frame)
+     (origin-frame frame)
      (add-vect (scale-vect (xcor-vect v)
-                           (edge-vect frame))
+                           (edge1-frame frame))
                (scale-vect (ycor-vect v)
                            (edge2-frame frame))))))
 
@@ -77,7 +77,7 @@
 (define (ycor-vect v) (cdr v))
 (define (add-vect v1 v2) (cons (+ (xcor-vect v1) (xcor-vect v2)) (+ (ycor-vect v1) (ycor-vect v2))))
 (define (sub-vect v1 v2) (cons (- (xcor-vect v1) (xcor-vect v2)) (- (ycor-vect v1) (ycor-vect v2))))
-(define (scala-vect s v) (cons (* s (xcor-vect v)) (* s (ycor-vect v))))
+(define (scale-vect s v) (cons (* s (xcor-vect v)) (* s (ycor-vect v))))
 
 (define (make-frame1 origin edge1 edge2)
   (list origin edge1 edge2))
@@ -86,19 +86,19 @@
   (cons origin (cons edge1 edge2)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(define (origin1 frame)
+(define (origin-frame frame)
   (car frame))
-(define (edge1-1 frame)
+(define (edge1-frame frame)
   (cadr frame))
-(define (edge1-2 frame)
+(define (edge2-frame frame)
   (caddr frame))
 
 (define (origin2 frame)
   (car frame))
 (define (edge2-1 frame)
-  (car (cdr frame)))
+  (cadr frame))
 (define (edge2-2 frame)
-  (cdr (cdr frame)))
+  (cddr frame))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define v1 (make-vect 1 2))
@@ -108,11 +108,11 @@
 (define frame1 (make-frame1 v1 v2 v3))
 (define frame2 (make-frame2 v1 v2 v3))
 
-(origin1 frame1)
+(origin-frame frame1)
 (origin2 frame2)
 
-(edge1-1 frame1)
+(edge1-frame frame1)
 (edge2-1 frame2)
 
-(edge1-2 frame1)
+(edge2-frame frame1)
 (edge2-2 frame2)
