@@ -32,6 +32,7 @@
 				((=number? e 1) b)
 				((=number? b 0) 0)
 				((=number? b 1) 1)
+				((and (number? b) (number? e)) (make-exponentiation b (- e 1)))
 				(else (list '** b e))))
 	
 (define (exponentiation? x)

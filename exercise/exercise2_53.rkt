@@ -14,3 +14,4 @@
 (pair? (car '(a short list)))
 (memq 'red '((red shoes) (blue socks)))
 (memq 'red '(red shoes blue socks))
+
